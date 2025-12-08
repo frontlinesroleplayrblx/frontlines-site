@@ -5,7 +5,7 @@ function CADPage() {
   const [units, setUnits] = useState([]);
 
   const fetchUnits = async () => {
-    const res = await fetch("http://localhost:5000/units");
+    const res = await fetch("https://frontlines-rp-rblx.onrender.com/units");
     const data = await res.json();
     setUnits(data);
   };

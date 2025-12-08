@@ -1,11 +1,11 @@
-# Use the lightweight nginx image
+# Use the official nginx Alpine image
 FROM nginx:alpine
 
-# Copy all files from the templates folder to nginx web root
+# Copy your local templates folder into nginx's web root
 COPY templates/ /usr/share/nginx/html/
 
-# Expose port 80 (default HTTP)
+# Expose port 80
 EXPOSE 80
 
-# Start nginx in the foreground
+# Run nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]

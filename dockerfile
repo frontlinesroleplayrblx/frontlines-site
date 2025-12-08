@@ -5,7 +5,6 @@ FROM nginx:alpine
 COPY templates/ /usr/share/nginx/html/
 
 
-
 # Expose port 80
 EXPOSE 80
 

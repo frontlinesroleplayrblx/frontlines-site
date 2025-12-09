@@ -5,9 +5,13 @@ function CADPage() {
   const [units, setUnits] = useState([]);
 
   const fetchUnits = async () => {
-    const res = await fetch("https://frontlines-rp-rblx.onrender.com/units");
-    const data = await res.json();
-    setUnits(data);
+    try {
+      const res = await fetch("https://frontlines-rp-rblx.onrender.com/units");
+      const data = await res.json();
+      setUnits(data);
+    } catch (err) {
+      console.error("Error fetching units", err);
+    }
   };
 
   useEffect(() => {
@@ -17,10 +21,10 @@ function CADPage() {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h1>CAD Dashboard</h1>
-      <div>
-        {units.map(unit => (
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {units.map((unit) => (
           <UnitCard key={unit.id} unit={unit} />
         ))}
       </div>

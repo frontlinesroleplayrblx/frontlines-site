@@ -1,60 +1,44 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function SignupPage() {
+const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
+
+export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
 
   const handleSignup = async () => {
-    setMessage("Creating account...");
+    setMsg("Processing...");
+
     try {
-      const res = await fetch("https://frontlines-rp-rblx.onrender.com/signup", {
+      const response = await fetch(`${BACKEND_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
       });
 
-      const data = await res.json();
-      setMessage(data.msg);
+      const data = await response.json();
+      setMsg(data.msg);
 
-      if (data.success) {
-        setTimeout(() => navigate("/login"), 1200);
-      }
+      if (data.success) window.location.href = "/";
     } catch {
-      setMessage("Could not connect to server.");
+      setMsg("Error connecting to server.");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div>
       <h1>Create Account</h1>
 
-      <input
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      /><br /><br />
-
-      <input
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
+      <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 
       <button onClick={handleSignup}>Sign Up</button>
 
-      <p style={{ color: "red", marginTop: "20px" }}>
-        {message}
-      </p>
+      <p>{msg}</p>
 
-      <p>
-        <a href="/login">Already have an account? Login</a>
-      </p>
+      <Link to="/">Back to Login</Link>
     </div>
   );
 }
-
-export default SignupPage;

@@ -1,20 +1,18 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StartPage from "./pages/StartPage";
+
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import CADPage from "./pages/CADPage";
+import UnitsPage from "./pages/UnitsPage";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<StartPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/cad" element={<CADPage />} />
+        <Route path="/units" element={<UnitsPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;

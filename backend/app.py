@@ -20,6 +20,23 @@ cur = conn.cursor()
 # Example: Units table
 # CREATE TABLE units (id SERIAL PRIMARY KEY, name TEXT, status TEXT);
 
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    # Check if user already exists
+    cur.execute("SELECT * FROM users WHERE username=%s", (username,))
+    if cur.fetchone():
+        return jsonify({"success": False, "message": "Username already exists"})
+
+    # Insert new user
+    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+    conn.commit()
+    return jsonify({"success": True})
+
+
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()

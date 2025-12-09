@@ -1,10 +1,16 @@
+import { Link } from "react-router-dom";
+
 export default function StartPage() {
   return (
-    <div className="container">
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Frontlines Roleplay</h1>
-      <a href="/login">Login</a>
-      <br />
-      <a href="/signup">Create Account</a>
+
+      <p>
+        <Link to="/login">Login</Link>
+      </p>
+      <p>
+        <Link to="/signup">Create Account</Link>
+      </p>
     </div>
   );
 }

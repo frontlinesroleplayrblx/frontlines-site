@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-import psycopg2
+from flask_cors import CORS # type: ignore
+import psycopg2 # type: ignore
 import os
 
 app = Flask(__name__)
 CORS(app)
 
-# Database connection
+# PostgreSQL connection
 conn = psycopg2.connect(
     host=os.getenv("DB_HOST"),
     database=os.getenv("DB_NAME"),
@@ -15,34 +15,37 @@ conn = psycopg2.connect(
 )
 cur = conn.cursor()
 
-# --- Routes ---
+# Example: Users table
+# CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT UNIQUE, password TEXT);
+# Example: Units table
+# CREATE TABLE units (id SERIAL PRIMARY KEY, name TEXT, status TEXT);
 
-# Login
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.json
+    data = request.get_json()
     username = data.get("username")
     password = data.get("password")
-    # Simple example; in production use hashed passwords
-    cur.execute("SELECT * FROM users WHERE username=%s AND password_hash=%s", (username, password))
+    
+    cur.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
     user = cur.fetchone()
+    
     if user:
-        return jsonify({"success": True, "user": username})
-    return jsonify({"success": False}), 401
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False})
 
-# Get all units
 @app.route("/units", methods=["GET"])
 def get_units():
     cur.execute("SELECT id, name, status FROM units")
-    units = [{"id": u[0], "name": u[1], "status": u[2]} for u in cur.fetchall()]
+    rows = cur.fetchall()
+    units = [{"id": r[0], "name": r[1], "status": r[2]} for r in rows]
     return jsonify(units)
 
-# Update unit status
 @app.route("/units/<int:unit_id>/status", methods=["POST"])
 def update_unit(unit_id):
-    data = request.json
+    data = request.get_json()
     new_status = data.get("status")
-    cur.execute("UPDATE units SET status=%s, last_update=NOW() WHERE id=%s", (new_status, unit_id))
+    cur.execute("UPDATE units SET status=%s WHERE id=%s", (new_status, unit_id))
     conn.commit()
     return jsonify({"success": True})
 

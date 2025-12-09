@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
+
+const navigate = useNavigate();
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -22,8 +25,7 @@ export default function LoginPage() {
       setMsg(data.msg);
 
       if (data.success) {
-        // Redirect to the CAD dashboard after successful login
-        window.location.href = "/units";
+        navigate("/units");
       }
     } catch (err) {
       console.error(err);

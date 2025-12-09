@@ -1,4 +1,4 @@
-export default function LoginPage() {
+export default function StartPage() {
   return (
     <div className="container">
       <h1>Frontlines Roleplay</h1>

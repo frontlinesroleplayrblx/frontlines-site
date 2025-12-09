@@ -9,6 +9,10 @@ function StartPage() {
       <Link to="/login">
         <button>Login</button>
       </Link>
+      <br /><br />
+      <p>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </p>
     </div>
   );
 }

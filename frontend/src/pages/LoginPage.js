@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
-
-const navigate = useNavigate();
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setMsg("Processing...");
@@ -25,7 +23,7 @@ export default function LoginPage() {
       setMsg(data.msg);
 
       if (data.success) {
-        navigate("/units");
+        navigate("/units"); // client-side redirect
       }
     } catch (err) {
       console.error(err);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
 
@@ -7,6 +7,7 @@ export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
     setMsg("Processing...");
@@ -21,24 +22,44 @@ export default function SignupPage() {
       const data = await response.json();
       setMsg(data.msg);
 
-      if (data.success) window.location.href = "/";
-    } catch {
+      if (data.success) {
+        navigate("/units");
+      }
+    } catch (err) {
+      console.error(err);
       setMsg("Error connecting to server.");
     }
   };
 
   return (
-    <div>
-      <h1>Create Account</h1>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Sign Up</h1>
 
-      <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      /><br /><br />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      /><br /><br />
 
       <button onClick={handleSignup}>Sign Up</button>
 
-      <p>{msg}</p>
+      {msg && <p>{msg}</p>}
 
-      <Link to="/">Back to Login</Link>
+      <p>
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
+
+      <p>
+        Back to <Link to="/">Start Page</Link>
+      </p>
     </div>
   );
 }

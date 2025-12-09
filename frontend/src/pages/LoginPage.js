@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
 
+const { setUser } = useAuth();
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +25,7 @@ export default function LoginPage() {
       setMsg(data.msg);
 
       if (data.success) {
+        setUser({ username });
         navigate("/units"); // client-side redirect
       }
     } catch (err) {

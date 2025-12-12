@@ -17,7 +17,7 @@ export default function StartPage() {
   );
 }
 */
-/*
+
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Marketplace from "../components/Marketplace";
@@ -27,7 +27,7 @@ import Footer from "../components/Footer";
 export default function StartPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <Navbar />
+
       <Hero />
       <Marketplace />
       <CTA />
@@ -35,8 +35,5 @@ export default function StartPage() {
     </div>
   );
 }
-  */
 
-export default function StartPage() {
-  return <div>Test</div>;
-}
+

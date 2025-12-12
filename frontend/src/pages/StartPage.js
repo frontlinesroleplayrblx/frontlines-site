@@ -29,16 +29,22 @@ export default function StartPage() {
 // src/index.css
 
 // ===================== src/main.jsx =====================
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "../App";
-import "../styles.css";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Marketplace from "../components/Marketplace";
+import CTA from "../components/CTA";
+import Footer from "../components/Footer";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
+export default function StartPage() {
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      <Navbar />
+      <Hero />
+      <Marketplace />
+      <CTA />
+      <Footer />
+    </div>
+  );
+}
 // ===================== src/App.jsx =====================
 

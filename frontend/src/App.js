@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -7,7 +7,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 
 export default function App() {
   return (
-    <Router>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -21,6 +21,6 @@ export default function App() {
           }
         />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }

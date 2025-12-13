@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -7,9 +9,11 @@ export default function Hero() {
         <h1 className="text-5xl font-semibold tracking-tight md:text-6xl">
           The Developer Marketplace
         </h1>
+
         <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
           Buy and sell premium Roblox assets, systems, and UI kits — built by real developers.
         </p>
+
         <div className="mt-12 flex justify-center gap-4">
           <Link
             to="/units"
@@ -17,6 +21,7 @@ export default function Hero() {
           >
             Browse Marketplace
           </Link>
+
           <button className="rounded-lg border border-white/10 px-7 py-3 font-medium text-zinc-200 hover:bg-white/5">
             Start Selling
           </button>

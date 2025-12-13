@@ -8,10 +8,10 @@ export default function StartPage() {
   return (
     <div style={{ color: "white" }}>
       <Navbar />
-      {/* <Hero /> */}
+      <Hero />
       <Marketplace />
-      {/* <CTA /> */}
-      {/* <Footer /> */}
+      <CTA />
+      <Footer />
     </div>
   );
 }

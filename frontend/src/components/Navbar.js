@@ -18,7 +18,7 @@ export default function Navbar() {
           to="/login"
           className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200"
         >
-          Sign In
+          Log In
         </Link>
       </div>
     </nav>

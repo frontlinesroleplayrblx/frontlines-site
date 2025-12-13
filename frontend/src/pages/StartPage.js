@@ -1,17 +1,21 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar"
 import Hero from "../components/Hero";
+import StatsBar from "../components/StatsBar";
+import FeaturedProduct from "../components/FeaturedProduct";
 import Marketplace from "../components/Marketplace";
-import CTA from "../components/CTA";
-import Footer from "../components/Footer";
+import ValueProps from "../components/ValueProps";
+import FAQ from "../components/FAQ";
 
 export default function StartPage() {
   return (
-    <div style={{ color: "white" }}>
+    <>
       <Navbar />
       <Hero />
+      <StatsBar />
+      <FeaturedProduct />
       <Marketplace />
-      <CTA />
-      <Footer />
-    </div>
+      <ValueProps />
+      <FAQ />
+    </>
   );
 }

@@ -69,6 +69,10 @@ export default function LoginPage() {
       <p>
         Back to <Link to="/">Start Page</Link>
       </p>
+
+      <p>
+        No account? Sign up <Link to="/signup">here</Link>
+      </p>
     </div>
   );
 }

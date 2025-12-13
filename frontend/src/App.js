@@ -31,14 +31,8 @@ export default function App() {
   */
 
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import StartPage from "./pages/StartPage";
 
 export default function App() {
-  return (
-    <Router>
-      <div style={{ color: "white", padding: 40 }}>
-        ROUTER WORKS
-      </div>
-    </Router>
-  );
+  return <StartPage />;
 }

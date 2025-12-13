@@ -6,12 +6,12 @@ import Footer from "../components/Footer";
 
 export default function StartPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div style={{ color: "white" }}>
       <Navbar />
-      <Hero />
-
-      <CTA />
-      <Footer />
+      {/* <Hero /> */}
+      {/* <Marketplace /> */}
+      {/* <CTA /> */}
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -7,7 +7,11 @@ import Footer from "../components/Footer";
 export default function StartPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <p>test</p>
+      <Navbar />
+      <Hero />
+
+      <CTA />
+      <Footer />
     </div>
   );
 }

@@ -31,11 +31,14 @@ export default function App() {
   */
 
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 export default function App() {
   return (
-    <div style={{ color: "white", padding: 40 }}>
-      APP IS RENDERING
-    </div>
+    <Router>
+      <div style={{ color: "white", padding: 40 }}>
+        ROUTER WORKS
+      </div>
+    </Router>
   );
 }

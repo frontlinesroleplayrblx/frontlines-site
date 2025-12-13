@@ -32,7 +32,8 @@ export default function LoginPage() {
       setLoading(false);
 
       if (data.success) {
-        // redirect to units dashboard
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("username", username);
         navigate("/units");
       }
     } catch (err) {

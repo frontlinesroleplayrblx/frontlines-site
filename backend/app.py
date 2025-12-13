@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+from flask_cors import CORS                                         # type: ignore
+from google.oauth2 import service_account                           # type: ignore
+from googleapiclient.discovery import build                         # type: ignore
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +12,7 @@ RANGE_NAME = "A2:B"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 creds = service_account.Credentials.from_service_account_file(
-    "backend/google-service-account.json",
+    "../backend/google-service-account.json",
     scopes=SCOPES
 )
 

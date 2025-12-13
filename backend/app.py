@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 SPREADSHEET_ID = "1iD_5fdFBoD8rsyDywGcWxaPe3xOJkLKppb2YWZWGcEk"
-RANGE_NAME = "A2:C"
+RANGE_NAME = "A2:B"
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 

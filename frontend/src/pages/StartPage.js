@@ -5,6 +5,7 @@ import FeaturedProduct from "../components/FeaturedProduct";
 import Marketplace from "../components/Marketplace";
 import ValueProps from "../components/ValueProps";
 import FAQ from "../components/FAQ";
+import Footer from "../components/Footer"
 
 export default function StartPage() {
   return (
@@ -16,6 +17,7 @@ export default function StartPage() {
       <Marketplace />
       <ValueProps />
       <FAQ />
+      <Footer />
     </>
   );
 }

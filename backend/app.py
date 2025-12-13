@@ -19,35 +19,34 @@ creds = service_account.Credentials.from_service_account_file(
 service = build("sheets", "v4", credentials=creds)
 sheet = service.spreadsheets()
 
-# === Login endpoint ===
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
+    print("Received data:", data)
+
     username = data.get("username")
     password = data.get("password")
 
-    if not username or not password:
-        return jsonify(success=False, msg="Missing credentials")
-
-    # Read all rows from the Google Sheet
     result = sheet.values().get(
         spreadsheetId=SPREADSHEET_ID,
         range=RANGE_NAME
     ).execute()
 
     rows = result.get("values", [])
+    print("Sheet rows:", rows)
 
-    # Check credentials
     for row in rows:
-        sheet_user = row[0]
-        sheet_password = row[1]
+        print("Checking row:", row)
+
+        sheet_user = row[0].strip()
+        sheet_password = row[1].strip()
 
         if sheet_user == username:
             if sheet_password == password:
                 return jsonify(success=True, msg="Login successful")
             return jsonify(success=False, msg="Invalid password")
 
-    return jsonify(success=False, msg="User not found")
+    return jsonify(success=False, msg="User does not exist")
 
 # === Run server ===
 if __name__ == "__main__":

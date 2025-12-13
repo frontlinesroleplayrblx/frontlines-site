@@ -37,35 +37,17 @@ export default function SignupPage() {
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Sign Up</h1>
+        <p>
+            sign up page
+        </p>
 
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br /><br />
+        <p>
+            Already have an account? <Link to="/login">Login</Link>
+        </p>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br /><br />
-
-      <button onClick={handleSignup}>Create Account</button>
-
-      {msg && <p>{msg}</p>}
-
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-
-      <p>
-        Back to <Link to="/">Start Page</Link>
-      </p>
+        <p>
+            Back to <Link to="/">Start Page</Link>
+        </p>
     </div>
   );
 }

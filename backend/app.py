@@ -1,52 +1,53 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS # type: ignore
+from flask_cors import CORS
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+import bcrypt
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# TEMP in-memory user store
-# Replace with database later
-users = {}
+SPREADSHEET_ID = "YOUR_SHEET_ID"
+RANGE_NAME = "A2:C"
 
-@app.post("/signup")
-def signup():
-    data = request.json
-    u = data.get("username")
-    p = data.get("password")
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-    if not u or not p:
-        return jsonify(success=False, msg="Missing username or password"), 400
+creds = service_account.Credentials.from_service_account_file(
+    "backend/google-service-account.json",
+    scopes=SCOPES
+)
 
-    if u in users:
-        return jsonify(success=False, msg="User already exists"), 409
+service = build("sheets", "v4", credentials=creds)
+sheet = service.spreadsheets()
 
-    users[u] = p
-    return jsonify(success=True, msg="Signup successful")
-
-
-@app.post("/login")
+@app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    u = data.get("username")
-    p = data.get("password")
+    username = data.get("username")
+    password = data.get("password")
 
-    if u not in users:
-        return jsonify(success=False, msg="User does not exist"), 404
+    if not username or not password:
+        return jsonify(success=False, msg="Missing credentials")
 
-    if users[u] != p:
-        return jsonify(success=False, msg="Incorrect password"), 401
+    result = sheet.values().get(
+        spreadsheetId=SPREADSHEET_ID,
+        range=RANGE_NAME
+    ).execute()
 
-    return jsonify(success=True, msg="Login successful")
+    rows = result.get("values", [])
 
+    for row in rows:
+        sheet_user = row[0]
+        sheet_hash = row[1]
 
-@app.get("/units")
-def units():
-    # Static example data (replace later)
-    return jsonify([
-        {"id": 1, "name": "Unit 101", "status": "Available"},
-        {"id": 2, "name": "Unit 102", "status": "Busy"}
-    ])
+        if sheet_user == username:
+            if bcrypt.checkpw(password.encode(), sheet_hash.encode()):
+                return jsonify(success=True, msg="Login successful")
 
+            return jsonify(success=False, msg="Invalid password")
+
+    return jsonify(success=False, msg="User not found")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

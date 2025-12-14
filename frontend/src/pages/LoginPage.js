@@ -27,7 +27,9 @@ export default function LoginPage() {
       setLoading(false);
 
       if (data.success) {
-        // In a real app with routing: navigate("/units");
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("username", username);
+        navigate("/units");
         setMsg("Login successful!");
       }
     } catch (err) {

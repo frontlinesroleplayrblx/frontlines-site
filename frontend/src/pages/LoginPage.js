@@ -1,9 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+const BACKEND_URL = "https://frontlines-rp-rblx.onrender.com";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState("");       // message to display
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -16,7 +21,7 @@ export default function LoginPage() {
     setMsg("Logging in...");
 
     try {
-      const response = await fetch("https://frontlines-rp-rblx.onrender.com/login", {
+      const response = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -27,10 +32,10 @@ export default function LoginPage() {
       setLoading(false);
 
       if (data.success) {
+        // redirect to units dashboard
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("username", username);
         navigate("/units");
-        setMsg("Login successful!");
       }
     } catch (err) {
       console.error(err);
